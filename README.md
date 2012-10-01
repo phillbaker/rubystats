@@ -1,2 +1,4 @@
 rubystats
 =========
+
+See README.txt
