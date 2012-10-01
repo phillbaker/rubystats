@@ -1,0 +1,19 @@
+=== 0.2.3 / 2008-07-06
+* Fixing bug #21100 - problem with Beta distribution calculations when p and q values are small.
+* Minor code cleanup for readability in a few places.
+
+=== 0.2.2 / 2008-05-09
+* Added exponential distribution class
+* Replaced constants in NumericalConstants module with uppercase versions to follow Ruby convention  
+
+=== 0.2.1 / 2008-05-08
+* Bug fix for Normal Distribution RNG function (RubyForge bug #20044)
+   * thanks, Daniel Moore (yahivin)
+
+=== 0.2.0 / 2008-04-14
+
+* Major reorganization of code.  
+  * Added lib/rubystats subdirectory and namespaced all classes under the Rubystats module.  
+  * Added another example or two and fixed bug #16827. 
+  * Should not break old API 
+  * Now using Hoe to manage gem.

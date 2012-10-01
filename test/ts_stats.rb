@@ -1,0 +1,7 @@
+require 'test/unit'
+require 'tc_fisher'
+require 'tc_binomial'
+require 'tc_beta'
+require 'tc_norm'
+require 'tc_exponential'
+require 'tc_require_all'
