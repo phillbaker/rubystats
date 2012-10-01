@@ -12,7 +12,7 @@ class TestNormal < Test::Unit::TestCase
     norm = NormalDistribution.new(10,2)
     cdf = norm.cdf(11)
 
-    assert_equal("0.691462461274013",cdf.to_s)
+    assert_equal("0.6914624612740131",cdf.to_s)
     assert_not_nil(norm.rng)
 
     expd = ExponentialDistribution.new(2)

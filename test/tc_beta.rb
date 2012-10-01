@@ -7,11 +7,11 @@ class TestBeta < Test::Unit::TestCase
 		p = 12
 		q = 59
 		beta = Rubystats::BetaDistribution.new(p,q)
-		assert_equal("0.169014084507042", beta.mean.to_s)
-		assert_equal("0.0441664031038187", beta.standard_deviation.to_s)
-		assert_equal("6.26075815849967", beta.pdf(0.2).to_s)
-		assert_equal("0.999999997766913", beta.cdf(0.50).to_s)
-		assert_equal("0.102003194113565", beta.icdf(0.05).to_s)
+		assert_equal("0.16901408450704225", beta.mean.to_s)
+		assert_equal("0.04416640310381873", beta.standard_deviation.to_s)
+		assert_equal("6.260758158499666", beta.pdf(0.2).to_s)
+		assert_equal("0.9999999977669126", beta.cdf(0.50).to_s)
+		assert_equal("0.10200319411356515", beta.icdf(0.05).to_s)
 
 		x_vals = [0.1, 0.15, 0.2, 0.25, 0.3, 0.35]
 		p_vals = beta.pdf(x_vals)
@@ -28,7 +28,7 @@ class TestBeta < Test::Unit::TestCase
 			0.956058132801147,
 			0.995358286711105,
 			0.99971672771575]
-     
+
     0.upto(x_vals.size - 1) do |i|
       assert_in_delta expected_pvals[i], p_vals[i], 0.00000001
       assert_in_delta expected_cvals[i], c_vals[i], 0.00000001
@@ -43,8 +43,8 @@ class TestBeta < Test::Unit::TestCase
 	end
 
   def test_low_p_and_q_values
-		p = 1.5 
-		q = 1.0 
+		p = 1.5
+		q = 1.0
 		beta = Rubystats::BetaDistribution.new(p,q)
 
     #from PHPExcel/PHPMath output
@@ -66,16 +66,16 @@ class TestBeta < Test::Unit::TestCase
 		p = 10
 		lcl = get_lower_limit(trials, alpha, p)
 		ucl = get_upper_limit(trials, alpha, p)
-		assert_equal("0.112721613414076",lcl.to_s)
-		assert_equal("0.315596061420013",ucl.to_s)
+		assert_equal("0.1127216134140763",lcl.to_s)
+		assert_equal("0.3155960614200132",ucl.to_s)
 
-		trials = 210 
+		trials = 210
 		alpha = 0.10
-		p = 47 
+		p = 47
 		lcl = get_lower_limit(trials, alpha, p)
 		ucl = get_upper_limit(trials, alpha, p)
-		assert_equal("0.186679485269901",lcl.to_s)
-		assert_equal("0.264957601783544",ucl.to_s)
+		assert_equal("0.18667948526990116",lcl.to_s)
+		assert_equal("0.2649576017835441",ucl.to_s)
 	end
 
 	def get_lower_limit(trials,alpha,p)
