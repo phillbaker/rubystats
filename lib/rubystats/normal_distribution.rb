@@ -13,7 +13,7 @@ module Rubystats
     def initialize(mu=0.0, sigma=1.0)
       @mean = mu
       if sigma <= 0.0
-        return "error"
+        raise "error, invalid sigma #{sigma}, should be > 0"
       end
       @stdev = sigma
       @variance = sigma**2
