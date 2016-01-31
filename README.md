@@ -1,4 +1,0 @@
-rubystats
-=========
-
-See README.txt
