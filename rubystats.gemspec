@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
 
   s.homepage = 'https://github.com/phillbaker/rubystats'
 
-  s.add_development_dependency("rspec", "~> 2.0")
+  s.add_development_dependency("minitest", ">= 4.2", "< 5.0")
   s.add_development_dependency("hoe", ">= 1.7.0")
 end
 
