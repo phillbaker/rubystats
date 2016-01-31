@@ -1,8 +1,8 @@
 $:.unshift File.join(File.dirname(__FILE__), "..", "lib")
-require 'test/unit'
+require 'minitest/autorun'
 require 'rubystats/exponential_distribution'
 
-class TestExponential < Test::Unit::TestCase
+class TestExponential < MiniTest::Unit::TestCase
   def test_simple
     lmbda = 1
     expd = Rubystats::ExponentialDistribution.new(lmbda)
@@ -16,7 +16,7 @@ class TestExponential < Test::Unit::TestCase
     rngs = []
     rngsum = 0
     n = 5000
-    n.times do 
+    n.times do
       rng = expd.rng
       rngs << rng
       rngsum += rng

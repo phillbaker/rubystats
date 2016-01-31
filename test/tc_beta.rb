@@ -1,33 +1,33 @@
 $:.unshift File.join(File.dirname(__FILE__), "..", "lib")
-require 'test/unit'
+require 'minitest/autorun'
 require 'rubystats/beta_distribution'
 
-class TestBeta < Test::Unit::TestCase
-	def test_simple
-		p = 12
-		q = 59
-		beta = Rubystats::BetaDistribution.new(p,q)
-		assert_equal("0.16901408450704225", beta.mean.to_s)
-		assert_equal("0.04416640310381873", beta.standard_deviation.to_s)
-		assert_equal("6.260758158499666", beta.pdf(0.2).to_s)
-		assert_equal("0.9999999977669126", beta.cdf(0.50).to_s)
-		assert_equal("0.10200319411356515", beta.icdf(0.05).to_s)
+class TestBeta < MiniTest::Unit::TestCase
+  def test_simple
+    p = 12
+    q = 59
+    beta = Rubystats::BetaDistribution.new(p,q)
+    assert_equal("0.16901408450704225", beta.mean.to_s)
+    assert_equal("0.04416640310381873", beta.standard_deviation.to_s)
+    assert_equal("6.260758158499666", beta.pdf(0.2).to_s)
+    assert_equal("0.9999999977669126", beta.cdf(0.50).to_s)
+    assert_equal("0.10200319411356515", beta.icdf(0.05).to_s)
 
-		x_vals = [0.1, 0.15, 0.2, 0.25, 0.3, 0.35]
-		p_vals = beta.pdf(x_vals)
-		c_vals = beta.cdf(x_vals)
-		expected_pvals = [ 2.83232625227534,
-			8.89978000366836,
-			6.26075815849967,
-			1.72572305993386,
-			0.234475706454223,
-			0.0173700433944934]
-		expected_cvals = [0.0440640755091473,
-			0.356009606171447,
-			0.768319101921981,
-			0.956058132801147,
-			0.995358286711105,
-			0.99971672771575]
+    x_vals = [0.1, 0.15, 0.2, 0.25, 0.3, 0.35]
+    p_vals = beta.pdf(x_vals)
+    c_vals = beta.cdf(x_vals)
+    expected_pvals = [ 2.83232625227534,
+      8.89978000366836,
+      6.26075815849967,
+      1.72572305993386,
+      0.234475706454223,
+      0.0173700433944934]
+    expected_cvals = [0.0440640755091473,
+      0.356009606171447,
+      0.768319101921981,
+      0.956058132801147,
+      0.995358286711105,
+      0.99971672771575]
 
     0.upto(x_vals.size - 1) do |i|
       assert_in_delta expected_pvals[i], p_vals[i], 0.00000001
@@ -35,17 +35,17 @@ class TestBeta < Test::Unit::TestCase
       i += 1
     end
 
-		x_vals.each do |x|
-			cdf = beta.cdf(x)
-			inv_cdf = beta.icdf(cdf)
-			assert_in_delta(x, inv_cdf, 0.00000001)
-		end
-	end
+    x_vals.each do |x|
+      cdf = beta.cdf(x)
+      inv_cdf = beta.icdf(cdf)
+      assert_in_delta(x, inv_cdf, 0.00000001)
+    end
+  end
 
   def test_low_p_and_q_values
-		p = 1.5
-		q = 1.0
-		beta = Rubystats::BetaDistribution.new(p,q)
+    p = 1.5
+    q = 1.0
+    beta = Rubystats::BetaDistribution.new(p,q)
 
     #from PHPExcel/PHPMath output
     expected_icdf_vals = [
@@ -60,41 +60,41 @@ class TestBeta < Test::Unit::TestCase
     end
   end
 
-	def test_control_limits
-		trials = 50
-		alpha = 0.05
-		p = 10
-		lcl = get_lower_limit(trials, alpha, p)
-		ucl = get_upper_limit(trials, alpha, p)
-		assert_equal("0.1127216134140763",lcl.to_s)
-		assert_equal("0.3155960614200132",ucl.to_s)
+  def test_control_limits
+    trials = 50
+    alpha = 0.05
+    p = 10
+    lcl = get_lower_limit(trials, alpha, p)
+    ucl = get_upper_limit(trials, alpha, p)
+    assert_equal("0.1127216134140763",lcl.to_s)
+    assert_equal("0.3155960614200132",ucl.to_s)
 
-		trials = 210
-		alpha = 0.10
-		p = 47
-		lcl = get_lower_limit(trials, alpha, p)
-		ucl = get_upper_limit(trials, alpha, p)
-		assert_equal("0.18667948526990116",lcl.to_s)
-		assert_equal("0.2649576017835441",ucl.to_s)
-	end
+    trials = 210
+    alpha = 0.10
+    p = 47
+    lcl = get_lower_limit(trials, alpha, p)
+    ucl = get_upper_limit(trials, alpha, p)
+    assert_equal("0.18667948526990116",lcl.to_s)
+    assert_equal("0.2649576017835441",ucl.to_s)
+  end
 
-	def get_lower_limit(trials,alpha,p)
-		if p==0
-			lcl=0
-		else
-			q=trials-p+1
-			bin= Rubystats::BetaDistribution.new(p,q)
-			lcl=bin.icdf(alpha)
-		end
-		return lcl
-	end
+  def get_lower_limit(trials,alpha,p)
+    if p==0
+      lcl=0
+    else
+      q=trials-p+1
+      bin= Rubystats::BetaDistribution.new(p,q)
+      lcl=bin.icdf(alpha)
+    end
+    return lcl
+  end
 
-	def get_upper_limit(trials,alpha,p)
-		q=trials-p
-		p=p+1
-		bin= Rubystats::BetaDistribution.new(p,q)
-		ucl=bin.icdf(1-alpha)
-		return ucl
-	end
+  def get_upper_limit(trials,alpha,p)
+    q=trials-p
+    p=p+1
+    bin= Rubystats::BetaDistribution.new(p,q)
+    ucl=bin.icdf(1-alpha)
+    return ucl
+  end
 
 end

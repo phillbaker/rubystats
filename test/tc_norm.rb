@@ -1,8 +1,8 @@
 $:.unshift File.join(File.dirname(__FILE__), "..", "lib")
-require 'test/unit'
+require 'minitest/autorun'
 require 'rubystats/normal_distribution'
 
-class TestNormal < Test::Unit::TestCase
+class TestNormal < MiniTest::Unit::TestCase
   def test_simple
 
     norm = Rubystats::NormalDistribution.new(10,2)
