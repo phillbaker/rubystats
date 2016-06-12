@@ -81,7 +81,7 @@ Output:
 
 == REQUIREMENTS:
 
-* Ruby > 1.8.2 (may work with earlier versions)
+* Ruby >= 1.9.3 (may work with earlier versions)
 
 == INSTALL:
 
