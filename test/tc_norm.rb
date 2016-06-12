@@ -24,7 +24,7 @@ class TestNormal < MiniTest::Unit::TestCase
     assert_in_epsilon 0.682689492137 , one_sigma.to_f / total, 0.02, 'the 1-sigma-environment should contain 68.3%'
 
     two_sigma = one_sigma + histogram[8] + histogram[11]
-    assert_in_epsilon 0.954499736104 , two_sigma.to_f / total, 0.005, 'the 2-sigma-environment should contain 95.4%'
+    assert_in_epsilon 0.954499736104 , two_sigma.to_f / total, 0.01, 'the 2-sigma-environment should contain 95.4%'
 
     three_sigma = two_sigma + histogram[7] + histogram[12]
     assert_in_epsilon 0.997300203937 , three_sigma.to_f / total, 0.001, 'the 3-sigma-environment should contain 99.7%'
