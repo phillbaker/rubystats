@@ -154,7 +154,7 @@ module Rubystats
         _pdf = pdf(x)
         if _pdf != 0.0
           dx = error / _pdf
-          x_new = x -dx
+          x_new = x - dx
         end
         # If the NR fails to converge (which for example may be the 
         # case if the initial guess is too rough) we apply a bisection
