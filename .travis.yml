@@ -5,6 +5,7 @@ before_script:
   - 'echo ''gem: --no-ri --no-rdoc'' > ~/.gemrc' # skip installing docs for gems
 script: 'bundle exec rake test'
 rvm:
+  - 1.9.3
   - 2.0.0
   - 2.1.0
   - 2.2.0
