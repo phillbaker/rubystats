@@ -70,7 +70,7 @@ module Rubystats
     # variable x is less then X, i.e. P(x < _x).
     def cdf(_x)
       if _x.class == Array
-        inv_vals = []
+        pdf_vals = []
         for i in (0 ..._x.length)
           pdf_vals[i] = get_cdf(_x[i])
         end
@@ -150,7 +150,7 @@ module Rubystats
       am = @n * p
       if @n < 25
         bnl = 0.0
-        for i in (1...@n) 
+        (1...@n).each do
           if  Kernel.rand < p 
             bnl = bnl.next
           end

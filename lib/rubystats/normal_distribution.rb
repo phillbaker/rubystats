@@ -19,6 +19,7 @@ module Rubystats
       @variance = sigma**2
       @pdf_denominator = SQRT2PI * Math.sqrt(@variance)
       @cdf_denominator = SQRT2   * Math.sqrt(@variance)
+      @use_last = nil
     end
 
     # Returns the mean of the distribution

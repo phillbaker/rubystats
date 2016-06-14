@@ -15,6 +15,6 @@ class TestNormal < MiniTest::Unit::TestCase
     assert_equal("0.6914624612740131",cdf.to_s)
     refute_nil(norm.rng)
 
-    expd = ExponentialDistribution.new(2)
+    ExponentialDistribution.new(2)
   end
 end

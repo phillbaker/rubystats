@@ -381,7 +381,7 @@ module Rubystats
       ap  = a
       del = 1.0 / a
       sum = del
-      for n in (1...MAX_ITERATIONS)
+      (1...MAX_ITERATIONS).each do
         ap += 1
         del *= x / ap
         sum += del
@@ -738,7 +738,7 @@ module Rubystats
       if abs_x < 2.8571428
         r = eRa[0] + s * (eRa[1] + s * 
                           (eRa[2] + s * (eRa[3] + s * (eRa[4] + s * 
-                                                       (eRa[5] + s *(eRa[6] + s * eRa[7])
+                                                       (eRa[5] + s * (eRa[6] + s * eRa[7])
                                                        )))))
 
                                                        s = 1.0 + s * (eSa[0] + s * (eSa[1] + s * 
@@ -757,6 +757,6 @@ module Rubystats
       retval =  Math.exp(-x * x - 0.5625 + r/s) / abs_x
     end
     return ( if x >= 0.0 then retval else 2.0 - retval end )
-    end
+   end
   end
 end
