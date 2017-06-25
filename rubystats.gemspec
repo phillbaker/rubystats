@@ -4,6 +4,7 @@ require 'rubystats/version'
 Gem::Specification.new do |s|
   s.name        = 'rubystats'
   s.version     = Rubystats::VERSION
+  s.license     = "MIT"
   s.summary     = ''
   s.description = "Ruby Stats is a port of the statistics libraries from PHPMath. Probability distributions include binomial, beta, and normal distributions with PDF, CDF and inverse CDF as well as Fisher's Exact Test."
 
