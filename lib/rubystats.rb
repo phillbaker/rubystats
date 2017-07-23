@@ -6,7 +6,10 @@ require 'rubystats/exponential_distribution'
 require 'rubystats/version'
 
 module Rubystats
-
 end
 
-include Rubystats
+NormalDistribution = Rubystats::NormalDistribution
+BinomialDistribution = Rubystats::BinomialDistribution
+BetaDistribution = Rubystats::BetaDistribution
+FishersExactTest = Rubystats::FishersExactTest
+ExponentialDistribution = Rubystats::ExponentialDistribution
