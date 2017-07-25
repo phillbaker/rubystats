@@ -1,6 +1,6 @@
 = Rubystats
 
-* http://rubyforge.org/projects/rubystats/
+* https://github.com/phillbaker/rubystats
 
 == DESCRIPTION:
 
