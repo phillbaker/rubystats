@@ -98,17 +98,15 @@ class TestBeta < MiniTest::Unit::TestCase
   end
   
   def test_rng_distribution
-	p = 4.0
+    p = 4.0
     q = 12.0
     beta = Rubystats::BetaDistribution.new(p,q)
 	
-	total = 10000
-	values = Array.new(total).map{ beta.rng }
+    total = 10000
+    values = Array.new(total).map{ beta.rng }
 
-	#mean = p / (p + q) = 4.0 / 16.0 = 0.25
-	mean = values.inject(0.0) {|sum,v| sum + v} / values.size
-	assert_in_epsilon 0.25, mean.round(2), 0.01
-	
+    mean = values.inject(0.0) {|sum,v| sum + v} / values.size
+    assert_in_epsilon 0.25, mean.round(2), 0.01	
   end
   
 end
