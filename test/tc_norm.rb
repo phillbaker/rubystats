@@ -28,6 +28,16 @@ class TestNormal < MiniTest::Unit::TestCase
 
     three_sigma = two_sigma + histogram[7] + histogram[12]
     assert_in_epsilon 0.997300203937 , three_sigma.to_f / total, 0.005, 'the 3-sigma-environment should contain 99.7%'
-
   end
+  
+  def test_integer_input
+    meani, sdi = 10, 2
+    meanf, sdf = 10.0, 2.0
+    xi = 11
+    xf = 11.0
+    dnormi = Rubystats::NormalDistribution.new(meani,sdi).pdf(xi)
+    dnormf = Rubystats::NormalDistribution.new(meanf,sdf).pdf(xf)
+    assert_in_delta dnormi, dnormf, 0.00000001   
+  end
+  
 end

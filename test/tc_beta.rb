@@ -108,5 +108,14 @@ class TestBeta < MiniTest::Unit::TestCase
     mean = values.inject(0.0) {|sum,v| sum + v} / values.size
     assert_in_epsilon 0.25, mean.round(2), 0.01	
   end
+
+  def test_integer_input
+    pi, qi = 2, 4
+    pf, qf = 2.0, 4.0
+    x = 0.25
+    dbetai = Rubystats::BetaDistribution.new(pi,qi).pdf(x)
+    dbetaf = Rubystats::BetaDistribution.new(pf,qf).pdf(x)
+    assert_in_delta dbetai, dbetaf, 0.00000001   
+  end
   
 end
