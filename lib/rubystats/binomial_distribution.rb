@@ -22,7 +22,7 @@ module Rubystats
       if prob < 0.0 || prob > 1.0
         raise ArgumentError.new("prob must be between 0 and 1")
       end
-      @p = prob
+      @p = prob.to_f
     end
 
     #returns the number of trials

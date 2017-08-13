@@ -11,11 +11,11 @@ module Rubystats
     # Constructs a normal distribution (defaults to zero mean and
     # unity variance).
     def initialize(mu=0.0, sigma=1.0)
-      @mean = mu
+      @mean = mu.to_f
       if sigma <= 0.0
         raise "error, invalid sigma #{sigma}, should be > 0"
       end
-      @stdev = sigma
+      @stdev = sigma.to_f
       @variance = sigma**2
       @pdf_denominator = SQRT2PI * Math.sqrt(@variance)
       @cdf_denominator = SQRT2   * Math.sqrt(@variance)
