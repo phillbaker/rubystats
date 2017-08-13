@@ -1,14 +1,14 @@
 $:.unshift File.join(File.dirname(__FILE__), "..", "lib")
-require 'rubystats/normal_distribution'
+require 'rubystats/uniform_distribution'
 
-#normal distribution with mean of 10 and standard deviation of 2
-norm = Rubystats::NormalDistribution.new(10, 2)
-cdf = norm.cdf(11)
-pdf = norm.pdf(11)
-puts "CDF(11): #{cdf}"
-puts "PDF(11): #{pdf}"
+#uniform distribution with lower and upper bound of 0.0 and 1.0
+unif = Rubystats::UniformDistribution.new(1.0, 6.0)
+cdf = unif.cdf(2.5)
+pdf = unif.pdf(2.5)
+puts "CDF(2.5): #{cdf}"
+puts "PDF(2.5): #{pdf}"
 
-puts "Random numbers from normal distribution:"
+puts "Random numbers from the uniform distribution:"
 10.times do 
-  puts norm.rng
+  puts unif.rng
 end
