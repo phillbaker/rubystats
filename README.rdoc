@@ -49,7 +49,7 @@ Also includes Fisher's Exact Test
 == SYNOPSIS:
 === Example: normal distribution with mean of 10 and standard deviation of 2
 
- norm = Rubystats::NormalDistribution.new(10, 2)
+ norm = Rubystats::NormalDistribution.new(10.0, 2.0)
  cdf = norm.cdf(11)
  pdf = norm.pdf(11)
  puts "CDF(11): #{cdf}"
@@ -57,7 +57,7 @@ Also includes Fisher's Exact Test
 
 Output:
  CDF(11): 0.691462461274013
- PDF(11): 0.0733813315868699
+ PDF(11): 0.17603266338214973
 
 === Example: get some random numbers from a normal distribution
 

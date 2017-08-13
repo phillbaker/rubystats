@@ -96,5 +96,17 @@ class TestBeta < MiniTest::Unit::TestCase
     ucl=bin.icdf(1-alpha)
     return ucl
   end
+  
+  def test_rng_distribution
+    p = 4.0
+    q = 12.0
+    beta = Rubystats::BetaDistribution.new(p,q)
+	
+    total = 10000
+    values = Array.new(total).map{ beta.rng }
 
+    mean = values.inject(0.0) {|sum,v| sum + v} / values.size
+    assert_in_epsilon 0.25, mean.round(2), 0.01	
+  end
+  
 end
