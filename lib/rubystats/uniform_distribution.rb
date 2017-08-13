@@ -1,40 +1,32 @@
 require 'rubystats/probability_distribution'
-# This class provides an object for encapsulating normal distributions
-# Ported to Ruby from PHPMath class by Bryan Donovan
-# Author:: Jaco van Kooten 
-# Author:: Paul Meagher
-# Author:: Bryan Donovan (http://www.bryandonovan.com)
+# This class provides an object for encapsulating uniform distributions
 module Rubystats
-  class NormalDistribution < Rubystats::ProbabilityDistribution
+  class UniformDistribution < Rubystats::ProbabilityDistribution
     include Rubystats::SpecialMath
 
-    # Constructs a normal distribution (defaults to zero mean and
-    # unity variance).
-    def initialize(mu=0.0, sigma=1.0)
-      @mean = mu.to_f
-      if sigma <= 0.0
-        raise "error, invalid sigma #{sigma}, should be > 0"
-      end
-      @stdev = sigma.to_f
-      @variance = sigma**2
-      @pdf_denominator = SQRT2PI * Math.sqrt(@variance)
-      @cdf_denominator = SQRT2   * Math.sqrt(@variance)
+    # Constructs a uniform distribution (defaults to zero lower and
+    # unity upper bound).
+    def initialize(lower=0.0, upper=1.0)
+      lower,uppper = upper,lower if lower > upper
+      @lower = lower.to_f
+      @upper = upper.to_f
+      @pdf_denominator = 1.0 / (@upper - @lower)
       @use_last = nil
     end
 
     # Returns the mean of the distribution
     def get_mean 
-      return @mean
+      return 0.5*(@lower + @upper)
     end
 
     # Returns the standard deviation of the distribution
     def get_standard_deviation
-      return @stdev
+      return Math.sqrt(get_variance)
     end
 
     # Returns the variance of the distribution
     def get_variance
-      return @variance
+      return 1.0/12.0 * (@upper-@lower)**2
     end
 
     private
@@ -43,73 +35,36 @@ module Rubystats
     # Returns the probability that a stochastic variable x has the value X,
     # i.e. P(x=X)
     def get_pdf(x)
-      Math.exp( -((x-@mean)**2) / (2 * @variance)) / @pdf_denominator
+      if x >= @lower and x <= @upper then
+        @pdf_denominator
+      else 
+        0.0
+      end	  
     end
 
     # Obtain single CDF value
     # Returns the probability that a stochastic variable x is less than X,
     # i.e. P(x<X)
     def get_cdf(x)
-      complementary_error( -(x - @mean) / @cdf_denominator) / 2
+      if x >= @lower and x < @upper then
+        (x - @lower).fdiv(@upper - @lower)
+      elsif x >= @upper
+        1.0
+      else 
+        0.0
+      end	  
     end
 
     # Obtain single inverse CDF value.
     #	returns the value X for which P(x&lt;X).
     def get_icdf(p)
       check_range(p)
-      if p == 0.0
-        return -MAX_VALUE
-      end
-      if p == 1.0
-        return MAX_VALUE
-      end
-      if p == 0.5
-        return @mean
-      end
-
-      mean_save = @mean
-      var_save = @variance
-      pdf_D_save = @pdf_denominator
-      cdf_D_save = @cdf_denominator
-      @mean = 0.0
-      @variance = 1.0
-      @pdf_denominator = Math.sqrt(TWO_PI)
-      @cdf_denominator = SQRT2
-      x = find_root(p, 0.0, -100.0, 100.0)
-      #scale back
-      @mean = mean_save
-      @variance = var_save
-      @pdf_denominator = pdf_D_save
-      @cdf_denominator = cdf_D_save
-      return x * Math.sqrt(@variance) + @mean
+      return @lower + p.to_f * (@upper - @lower)
     end
 
-    # Uses the polar form of the Box-Muller transformation which
-    #	is both faster and more robust numerically than basic Box-Muller
-    # transform. To speed up repeated RNG computations, two random values
-    # are computed after the while loop and the second one is saved and
-    # directly used if the method is called again.
-    # see http://www.taygeta.com/random/gaussian.html
-    # returns single normal deviate
+    # returns single random number
     def get_rng
-      if @use_last
-        y1 = @last
-        @use_last = false
-      else
-        w = 1
-        until w < 1.0 do
-          r1 = Kernel.rand
-          r2 = Kernel.rand
-          x1 = 2.0 * r1 - 1.0
-          x2 = 2.0 * r2 - 1.0
-          w  = x1 * x1 + x2 * x2
-        end
-        w = Math.sqrt((-2.0 * Math.log(w)) / w)
-        y1 = x1 * w
-        @last = x2 * w
-        @use_last = true
-      end
-      return @mean + y1 * Math.sqrt(@variance)
+      return @lower + (@upper - @lower) * Kernel.rand
     end
   end
 end
