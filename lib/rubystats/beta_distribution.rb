@@ -85,9 +85,9 @@ module Rubystats
       end
     end
 
-	def rng
-	  self.icdf(rand)
-	end
+    def rng
+      self.icdf(rand)
+    end
 	
   end
 end
