@@ -57,4 +57,14 @@ class TestExponential < MiniTest::Unit::TestCase
       assert_in_delta(x, inv_cdf, 0.00000001)
     end
   end
+  
+  def test_integer_input
+    lambdai = 2
+    lambdaf = 2.0
+    xi = 3
+    xf = 3.0
+    dexpi = Rubystats::ExponentialDistribution.new(lambdai).pdf(xi)
+    dexpf = Rubystats::ExponentialDistribution.new(lambdaf).pdf(xf)
+    assert_in_delta dexpi, dexpf, 0.00000001   
+  end
 end

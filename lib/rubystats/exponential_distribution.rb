@@ -10,11 +10,11 @@ module Rubystats
     include Rubystats::SpecialMath
     include Rubystats::ExtraMath
 
-    def initialize(decay=1) 
+    def initialize(decay=1.0) 
       if decay < 0.0
         raise ArgumentError.new("Decay parameter should be positive.")
       end
-      @rate = decay
+      @rate = decay.to_f
     end
 
     private
