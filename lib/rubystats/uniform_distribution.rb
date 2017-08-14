@@ -35,7 +35,7 @@ module Rubystats
     # Returns the probability that a stochastic variable x has the value X,
     # i.e. P(x=X)
     def get_pdf(x)
-      if x >= @lower and x <= @upper then
+      if x >= @lower && x <= @upper
         @pdf_denominator
       else 
         0.0
@@ -46,7 +46,7 @@ module Rubystats
     # Returns the probability that a stochastic variable x is less than X,
     # i.e. P(x<X)
     def get_cdf(x)
-      if x >= @lower and x < @upper then
+      if x >= @lower && x < @upper
         (x - @lower).fdiv(@upper - @lower)
       elsif x >= @upper
         1.0
