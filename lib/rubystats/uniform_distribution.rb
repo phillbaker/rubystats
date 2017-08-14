@@ -7,7 +7,7 @@ module Rubystats
     # Constructs a uniform distribution (defaults to zero lower and
     # unity upper bound).
     def initialize(lower=0.0, upper=1.0)
-      lower,uppper = upper,lower if lower > upper
+      lower,upper = upper,lower if lower > upper
       @lower = lower.to_f
       @upper = upper.to_f
       @pdf_denominator = 1.0 / (@upper - @lower)
