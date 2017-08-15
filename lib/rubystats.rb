@@ -3,6 +3,8 @@ require 'rubystats/binomial_distribution'
 require 'rubystats/beta_distribution'
 require 'rubystats/fishers_exact_test'
 require 'rubystats/exponential_distribution'
+require 'rubystats/uniform_distribution'
+require 'rubystats/lognormal_distribution'
 require 'rubystats/version'
 
 module Rubystats
@@ -13,3 +15,5 @@ BinomialDistribution = Rubystats::BinomialDistribution
 BetaDistribution = Rubystats::BetaDistribution
 FishersExactTest = Rubystats::FishersExactTest
 ExponentialDistribution = Rubystats::ExponentialDistribution
+UniformDistribution = Rubystats::UniformDistribution
+LognormalDistribution = Rubystats::LognormalDistribution
