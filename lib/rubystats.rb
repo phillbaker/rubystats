@@ -5,6 +5,7 @@ require 'rubystats/fishers_exact_test'
 require 'rubystats/exponential_distribution'
 require 'rubystats/uniform_distribution'
 require 'rubystats/lognormal_distribution'
+require 'rubystats/student_t_distribution'
 require 'rubystats/version'
 
 module Rubystats
@@ -17,3 +18,4 @@ FishersExactTest = Rubystats::FishersExactTest
 ExponentialDistribution = Rubystats::ExponentialDistribution
 UniformDistribution = Rubystats::UniformDistribution
 LognormalDistribution = Rubystats::LognormalDistribution
+StudentTDistribution = Rubystats::StudentTDistribution
