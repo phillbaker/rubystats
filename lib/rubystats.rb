@@ -6,6 +6,8 @@ require 'rubystats/exponential_distribution'
 require 'rubystats/uniform_distribution'
 require 'rubystats/lognormal_distribution'
 require 'rubystats/student_t_distribution'
+require 'rubystats/weibull_distribution'
+require 'rubystats/cauchy_distribution'
 require 'rubystats/version'
 
 module Rubystats
@@ -19,3 +21,15 @@ ExponentialDistribution = Rubystats::ExponentialDistribution
 UniformDistribution = Rubystats::UniformDistribution
 LognormalDistribution = Rubystats::LognormalDistribution
 StudentTDistribution = Rubystats::StudentTDistribution
+WeibullDistribution = Rubystats::WeibullDistribution
+CauchyDistribution = Rubystats::CauchyDistribution
+
+#short-hand notation
+Normal = Rubystats::NormalDistribution
+Binomial = Rubystats::BinomialDistribution
+Beta = Rubystats::BetaDistribution
+Exponential = Rubystats::ExponentialDistribution
+Uniform = Rubystats::UniformDistribution
+Lognormal = Rubystats::LognormalDistribution
+Weibull = Rubystats::WeibullDistribution
+Cauchy = Rubystats::CauchyDistribution
