@@ -37,12 +37,21 @@
 This is beta-quality software. It works well according to my tests, but the API may change and other features may be added.
 
 == FEATURES:
-Classes for distributions:
+Classes for continuous distributions:
 
-* Normal
-* Binomial
 * Beta
+* Cauchy
 * Exponential
+* Gamma
+* Lognormal
+* Normal
+* Student t
+* Uniform
+* Weibull
+
+Classes for discrete distributions:
+
+* Binomial
 
 Also includes Fisher's Exact Test
 
