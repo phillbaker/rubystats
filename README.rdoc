@@ -52,6 +52,7 @@ Classes for continuous distributions:
 Classes for discrete distributions:
 
 * Binomial
+* Poisson
 
 Also includes Fisher's Exact Test
 
