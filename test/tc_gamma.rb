@@ -24,7 +24,7 @@ class TestGamma < MiniTest::Unit::TestCase
     n = 10000
     n.times {|i| rngs << gamma.rng }
     quantile = rngs.sort[(0.75*rngs.size).ceil] 
-    assert_in_delta(quantile, 7.84080, 0.1)
+    assert_in_delta(quantile, 7.84080, 0.2)
   end
   
   def test_integer_input
