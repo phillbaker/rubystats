@@ -9,6 +9,7 @@ require 'rubystats/student_t_distribution'
 require 'rubystats/weibull_distribution'
 require 'rubystats/cauchy_distribution'
 require 'rubystats/gamma_distribution'
+require 'rubystats/multivariate_normal_distribution'
 require 'rubystats/version'
 
 module Rubystats
@@ -25,6 +26,7 @@ StudentTDistribution = Rubystats::StudentTDistribution
 WeibullDistribution = Rubystats::WeibullDistribution
 CauchyDistribution = Rubystats::CauchyDistribution
 GammaDistribution = Rubystats::GammaDistribution
+MultivariateNormalDistribution = Rubystats::MultivariateNormalDistribution
 
 #short-hand notation
 Normal = Rubystats::NormalDistribution
@@ -36,3 +38,4 @@ Lognormal = Rubystats::LognormalDistribution
 Weibull = Rubystats::WeibullDistribution
 Cauchy = Rubystats::CauchyDistribution
 Gamma = Rubystats::GammaDistribution
+MultivariateNormal = Rubystats::MultivariateNormalDistribution
