@@ -9,6 +9,7 @@ module Rubystats
     include Rubystats::NumericalConstants
     include Rubystats::SpecialMath
     include Rubystats::ExtraMath
+    include Rubystats::MakeDiscrete
 
     attr_reader :p, :n
     attr_writer :p, :n
@@ -18,7 +19,7 @@ module Rubystats
       if trials <= 0
         raise ArgumentError.new("Error: trials must be greater than 0")
       end
-      @n = trials
+      @n = trials.to_i
       if prob < 0.0 || prob > 1.0
         raise ArgumentError.new("prob must be between 0 and 1")
       end
@@ -45,78 +46,19 @@ module Rubystats
       @n * @p * (1.0 - @p)
     end
 
+    # Private methods below
+
+    private
+
     # Probability density function of a binomial distribution (equivalent
     # to R dbinom function).
     # _x should be an integer
     # returns the probability that a stochastic variable x has the value _x,
     # i.e. P(x = _x)
-    def pdf(_x)
-      if _x.class == Array
-        pdf_vals = []
-        for i in (0 ... _x.length)
-          check_range(_x[i], 0.0, @n)
-          pdf_vals[i] = binomial(@n, _x[i]) * (1-@p)**(@n-_x[i])
-        end
-        return pdf_vals
-      else
-        check_range(_x, 0.0, @n)
-        return binomial(@n, _x) * @p**_x * (1-@p)**(@n-_x)
-      end
+    def get_pdf(x)
+      check_range(x, 0, @n)
+      binomial(@n, x) * @p**x * (1-@p)**(@n-x)
     end
-
-    # Cumulative binomial distribution function (equivalent to R pbinom function).
-    # _x should be integer-valued and can be single integer or array of integers
-    # returns single value or array containing probability that a stochastic 
-    # variable x is less then X, i.e. P(x < _x).
-    def cdf(_x)
-      if _x.class == Array
-        pdf_vals = []
-        for i in (0 ..._x.length)
-          pdf_vals[i] = get_cdf(_x[i])
-        end
-        return pdf_vals
-      else
-        return get_cdf(_x)
-      end
-    end
-
-    # Inverse of the cumulative binomial distribution function 
-    # (equivalent to R qbinom function).
-    # returns the value X for which P(x < _x).
-    def get_icdf(prob)
-      if prob.class == Array
-        inv_vals = []
-        for i in (0 ...prob.length)
-          check_range(prob[i])
-          inv_vals[i] = (find_root(prob[i], @n/2, 0.0, @n)).floor
-        end
-        return inv_vals
-      else
-        check_range(prob)
-        return (find_root(prob, @n/2, 0.0, @n)).floor
-      end
-    end
-
-    # Wrapper for binomial RNG function (equivalent to R rbinom function).
-    # returns random deviate given trials and p
-    def rng(num_vals = 1)
-      if num_vals < 1
-        raise "Error num_vals must be greater than or equal to 1"
-      end
-      if num_vals == 1
-        return get_rng
-      else
-        rand_vals = []
-        for i in (0 ...num_vals)
-          rand_vals[i] = get_rng
-        end
-        return rand_vals
-      end
-    end
-
-    # Private methods below
-
-    private
 
     # Private shared function for getting cumulant for particular x
     # param _x should be integer-valued
@@ -129,6 +71,14 @@ module Rubystats
         sum = sum + pdf(i)
       end
       return sum
+    end
+
+    # Inverse of the cumulative binomial distribution function 
+    # (equivalent to R qbinom function).
+    # returns the value X for which P(x < _x).
+    def get_icdf(prob)
+      check_range(prob)
+      (find_root(prob, @n/2, 0.0, @n)).floor
     end
 
     # Private binomial RNG function

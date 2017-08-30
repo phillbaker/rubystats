@@ -6,6 +6,12 @@ module Rubystats
     end
   end
 
+  module MakeDiscrete
+    def pmf(x)
+      pdf(x)
+    end
+  end  
+  
   module NumericalConstants
     MAX_FLOAT = 3.40282346638528860e292
     EPS = 2.22e-16
