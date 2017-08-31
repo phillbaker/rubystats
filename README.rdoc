@@ -44,6 +44,7 @@ Classes for continuous distributions:
 * Exponential
 * Gamma
 * Lognormal
+* Multivariate Normal
 * Normal
 * Student t
 * Uniform
