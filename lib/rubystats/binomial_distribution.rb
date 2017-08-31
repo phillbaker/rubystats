@@ -73,76 +73,37 @@ module Rubystats
       return sum
     end
 
-    # Inverse of the cumulative binomial distribution function 
-    # (equivalent to R qbinom function).
+    # Inverse of the cumulative binomial distribution function     
     # returns the value X for which P(x < _x).
-    def get_icdf(prob)
+    def get_icdf(prob)   
       check_range(prob)
-      (find_root(prob, @n/2, 0.0, @n)).floor
+      sum = 0.0
+      k = 0
+      until prob <= sum 
+        sum += get_pdf(k)
+        k += 1
+      end 
+      return k - 1
     end
 
-    # Private binomial RNG function
-    # Original version of this function from Press et al.
-    #
-    # see http://www.library.cornell.edu/nr/bookcpdf/c7-3.pdf
-    #
-    # Changed parts having to do with generating a uniformly distributed
-    # number in the 0 to 1 range.  Also using instance variables, instead
-    # of supplying function with p and n values.  Finally calling port
-    # of JSci's log gamma routine instead of Press et al.
-    #
-    # There are enough non-trivial changes to this function that the
-    # port conforms to the Press et al. copyright.
-    def get_rng
-      nold = -1
-      pold = -1
-      p = (if @p <= 0.5 then @p else 1.0 - @p end)
-      am = @n * p
-      if @n < 25
-        bnl = 0.0
-        (1...@n).each do
-          if  Kernel.rand < p 
-            bnl = bnl.next
-          end
+    # Private binomial RNG function    
+    # Variation of Luc Devroye's "Second Waiting Time Method" 
+    # on page 522 of his text "Non-Uniform Random Variate Generation."
+    # There are faster methods based on acceptance/rejection techniques, 
+    # but they are substantially more complex to implement.
+    def get_rng      
+      p = (@p <= 0.5) ? @p : (1.0 - @p)        
+      log_q = Math.log(1.0 - p)
+      sum = 0.0
+      k = 0
+      loop do
+        sum += Math.log(Kernel.rand) / (@n - k)
+        if (sum < log_q)
+          return (p != @p) ? (@n - k) : k          
         end
-      elsif am < 1.0
-        g = Math.exp(-am)
-        t = 1.0
-        for j in (0 ... @n)
-          t = t * Kernel.rand
-          break if t < g
-        end
-        bnl = (if j <= @n then j else @n end)
-      else
-        if n != nold
-          en = @n
-          oldg = log_gamma(en + 1.0)
-          nold = n
-        end
-        if p != pold
-          pc = 1.0 - p
-          plog = Math.log(p)
-          pclog = Math.log(pc)
-          pold = p
-        end
-        sq = Math.sqrt(2.0 * am * pc)
-        until Kernel.rand <= t do
-          until (em >= 0.0 || em < (en + 1.0)) do
-            angle = Pi * Kernel.rand
-            y = Math.tan(angle)
-            em = sq * y + am
-          end
-          em = em.floor
-          t = 1.2 * sq * (1.0 + y * y) * 
-          Math.exp(oldg - log_gamma(em + 1.0) - 
-          log_gamma(en - em + 1.0) + em * plog + (en - em) * pclog)
-        end
-        bnl = em
-      end
-      if p != @p
-        bnl = @n - bnl
-      end
-      return bnl
-    end
+        k += 1
+      end     
+    end      
+  
   end
 end

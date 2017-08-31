@@ -76,6 +76,7 @@ module Rubystats
         p *= @rate / x.to_f
         s += p
       end
+      x
     end
   end
 end

@@ -21,4 +21,16 @@ class TestBinomial < MiniTest::Unit::TestCase
     assert_equal("5.0",mean.to_s)
     assert_equal(f,inv_cdf)
   end
+  
+  def test_rng
+    t, p = 100, 0.75
+    bin = Rubystats::BinomialDistribution.new(t,p)
+  
+    rngs = []
+    n = 1000
+    n.times { rngs << bin.rng.to_f }
+    avg = rngs.reduce(:+) / rngs.size    
+    
+    assert_in_delta(avg, bin.mean, 0.5)
+  end
 end
