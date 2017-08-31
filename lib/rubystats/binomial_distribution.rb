@@ -70,12 +70,12 @@ module Rubystats
       for i in (0 .. _x) 
         sum = sum + pdf(i)
       end
-      return sum
+      sum
     end
 
     # Inverse of the cumulative binomial distribution function     
     # returns the value X for which P(x < _x).
-    def get_icdf(prob)   
+    def get_icdf(prob)
       check_range(prob)
       sum = 0.0
       k = 0
@@ -83,7 +83,7 @@ module Rubystats
         sum += get_pdf(k)
         k += 1
       end 
-      return k - 1
+      k - 1
     end
 
     # Private binomial RNG function    
