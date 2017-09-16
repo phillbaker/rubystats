@@ -1,5 +1,6 @@
 require 'rubystats/normal_distribution'
 require 'rubystats/binomial_distribution'
+require 'rubystats/poisson_distribution'
 require 'rubystats/beta_distribution'
 require 'rubystats/fishers_exact_test'
 require 'rubystats/exponential_distribution'
@@ -17,6 +18,7 @@ end
 
 NormalDistribution = Rubystats::NormalDistribution
 BinomialDistribution = Rubystats::BinomialDistribution
+PoissonDistribution = Rubystats::PoissonDistribution
 BetaDistribution = Rubystats::BetaDistribution
 FishersExactTest = Rubystats::FishersExactTest
 ExponentialDistribution = Rubystats::ExponentialDistribution
@@ -31,6 +33,7 @@ MultivariateNormalDistribution = Rubystats::MultivariateNormalDistribution
 #short-hand notation
 Normal = Rubystats::NormalDistribution
 Binomial = Rubystats::BinomialDistribution
+Poisson = Rubystats::PoissonDistribution
 Beta = Rubystats::BetaDistribution
 Exponential = Rubystats::ExponentialDistribution
 Uniform = Rubystats::UniformDistribution

@@ -1,6 +1,8 @@
 sudo: false
 cache: bundler
 language: ruby
+before_install:
+  - gem install bundler
 before_script:
   - 'echo ''gem: --no-ri --no-rdoc'' > ~/.gemrc' # skip installing docs for gems
 script: 'bundle exec rake test'

@@ -20,4 +20,16 @@ class TestPoisson < MiniTest::Unit::TestCase
     assert_equal(k,inv_cdf)
     assert_equal(3.5,mean)
   end
+  
+  def test_rng
+    rate = 3.5
+    pois = Rubystats::PoissonDistribution.new(rate)
+  
+    rngs = []
+    n = 1000
+    n.times { rngs << pois.rng.to_f }
+    avg = rngs.reduce(:+) / rngs.size    
+    
+    assert_in_delta(avg, pois.mean, 0.5)
+  end
 end

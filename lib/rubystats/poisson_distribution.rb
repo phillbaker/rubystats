@@ -1,14 +1,10 @@
 require 'rubystats/probability_distribution'
-# This class provides an object for encapsulating binomial distributions
-# Ported to Ruby from PHPMath class by Bryan Donovan
-# Author:: Mark Hale
-# Author:: Paul Meagher
-# Author:: Bryan Donovan (http://www.bryandonovan.com)
+
 module Rubystats
   class PoissonDistribution < Rubystats::ProbabilityDistribution 
     include Rubystats::MakeDiscrete
 
-    # Constructs a binomial distribution
+    # Constructs a Poisson distribution
     def initialize (rate)
       if rate <= 0.0
         raise ArgumentError.new("The rate for the Poisson distribution should be greater than zero.")
@@ -52,7 +48,7 @@ module Rubystats
       return sum
     end
 
-    # Inverse of the cumulative binomial distribution function 
+    # Inverse of the cumulative Poisson distribution function 
     def get_icdf(prob)
       check_range(prob)
       sum = 0.0
@@ -76,6 +72,7 @@ module Rubystats
         p *= @rate / x.to_f
         s += p
       end
+      x
     end
   end
 end
