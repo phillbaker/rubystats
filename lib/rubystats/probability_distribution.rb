@@ -122,7 +122,7 @@ module Rubystats
     def check_range(x, lo=0.0, hi=1.0)
       raise ArgumentError.new("x cannot be nil") if x.nil?
       if x < lo or x > hi
-        raise ArgumentError.new("x must be less than lo (#{lo}) and greater than hi (#{hi})") 
+        raise ArgumentError.new("x must be greater than lo (#{lo}) and less than hi (#{hi})") 
       end
     end
 
