@@ -20,11 +20,9 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency("minitest", ">= 4.2", "< 5.0")
   s.add_development_dependency("hoe", ">= 1.7.0")
-  if RUBY_VERSION >= "3.1"
-    # matrix was removed from default gems in Ruby 3.1, see
-    # https://github.com/ruby/ruby/pull/4530 and https://stdgems.org/
-    s.add_runtime_dependency("matrix")
-  end
 
+  # matrix was removed from default gems in Ruby 3.1, see
+  # https://github.com/ruby/ruby/pull/4530 and https://stdgems.org/
+  s.add_runtime_dependency("matrix")
 end
 
