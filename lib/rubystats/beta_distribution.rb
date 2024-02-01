@@ -10,7 +10,7 @@ module Rubystats
     #dgr_q = degrees of freedom q
     def initialize(dgr_p, dgr_q)
       if dgr_p <= 0 || dgr_q <= 0
-        raise ArgumentError.new("Paramters must be greater than zero.")
+        raise ArgumentError.new("Parameters must be greater than zero.")
       end
       @p = dgr_p.to_f
       @q = dgr_q.to_f
